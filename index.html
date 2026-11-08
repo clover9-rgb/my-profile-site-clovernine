@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>권일 | 클로버나인 대표 · 개발자</title>
+  <meta name="description" content="클로버나인을 운영하는 개발자 권일의 프로필 사이트. 웹메시징, 기프티콘, 고객관리프로그램 개발.">
+
+  <!-- 글꼴: 영문/숫자는 Manrope, 한글은 Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // 포인트 색상은 여기 한 곳에서만 정합니다.
+    // primary: 남색(900) → 파랑(600) → 하늘색(300) 으로 이어지는 파란 계열
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', '"Noto Sans KR"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              50:  '#eff5ff',
+              100: '#dbe8ff',
+              200: '#bcd4ff',
+              300: '#8db8ff',
+              400: '#5a95ff',
+              500: '#2f6fff',
+              600: '#1f55e6',
+              700: '#1a43bf',
+              800: '#1b399a',
+              900: '#172f6f',
+            },
+            ink: '#0b1220',        // 거의 검정에 가까운 본문 제목색
+            canvas: '#f2f4f7',     // 전체 배경 (연회색)
+          },
+          boxShadow: {
+            // 참고 이미지처럼 넓게 퍼지는 부드러운 그림자
+            soft: '0 10px 30px -10px rgba(16, 24, 40, 0.12), 0 2px 6px -2px rgba(16, 24, 40, 0.06)',
+            lift: '0 24px 50px -16px rgba(16, 24, 40, 0.18), 0 6px 14px -6px rgba(16, 24, 40, 0.08)',
+            tile: '10px 10px 24px rgba(16, 24, 40, 0.10), -8px -8px 20px rgba(255, 255, 255, 0.9)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-canvas text-slate-600 antialiased">
+
+  <!-- ===== 헤더 / 네비게이션 ===== -->
+  <header id="site-header" class="fixed inset-x-0 top-0 z-50 transition-all">
+    <nav class="mx-auto flex h-20 max-w-6xl items-center justify-between px-5 sm:px-8">
+      <a href="#top" class="flex items-center gap-2.5 text-2xl font-extrabold tracking-tight text-ink">
+        <span class="grid h-9 w-9 grid-cols-2 gap-1 rounded-lg bg-white p-1.5 shadow-soft">
+          <span class="rounded-sm bg-ink"></span>
+          <span class="rounded-sm bg-primary-500"></span>
+          <span class="rounded-sm bg-primary-300"></span>
+          <span class="rounded-sm bg-ink"></span>
+        </span>
+        권일
+      </a>
+
+      <!-- 데스크톱 메뉴 -->
+      <ul class="hidden items-center gap-10 text-lg font-medium md:ml-auto md:mr-8 md:flex" id="desktop-menu">
+        <li><a href="#about" class="nav-link" data-target="about">소개</a></li>
+        <li><a href="#skills" class="nav-link" data-target="skills">기술</a></li>
+        <li><a href="#projects" class="nav-link" data-target="projects">프로젝트</a></li>
+        <li><a href="#contact" class="nav-link" data-target="contact">연락처</a></li>
+      </ul>
+
+      <a href="#contact" class="pill-button hidden md:inline-flex">연락하기</a>
+
+      <!-- 모바일 햄버거 버튼 -->
+      <button id="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu"
+              class="inline-flex h-11 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-ink shadow-soft md:hidden">
+        <span>Menu</span>
+        <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- 모바일 메뉴 -->
+    <div id="mobile-menu" class="hidden px-5 md:hidden">
+      <ul class="mx-auto flex max-w-6xl flex-col rounded-2xl bg-white p-2 text-base font-medium shadow-lift">
+        <li><a href="#about" class="nav-link block rounded-xl px-4 py-3" data-target="about">소개</a></li>
+        <li><a href="#skills" class="nav-link block rounded-xl px-4 py-3" data-target="skills">기술</a></li>
+        <li><a href="#projects" class="nav-link block rounded-xl px-4 py-3" data-target="projects">프로젝트</a></li>
+        <li><a href="#contact" class="nav-link block rounded-xl px-4 py-3" data-target="contact">연락처</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===== 히어로 ===== -->
+    <section class="relative min-h-[620px] overflow-hidden bg-white lg:min-h-[760px]">
+      <!-- 입체 타일 배경 (js/main.js 가 타일을 채웁니다) -->
+      <div id="hero-tiles" aria-hidden="true" class="hero-tiles"></div>
+      <div aria-hidden="true" class="hero-fade"></div>
+
+      <div class="relative mx-auto flex min-h-[620px] max-w-6xl flex-col justify-center px-5 pb-24 pt-36 sm:px-8 sm:pt-44 lg:min-h-[760px]">
+        <div class="max-w-3xl">
+          <h1 class="text-5xl font-extrabold leading-[1.12] tracking-tight text-ink sm:text-6xl lg:text-7xl">
+            안녕하세요,<br>
+            <span class="gradient-text">권일</span>입니다.<br>
+            <span class="text-slate-900">회사를 </span><span class="gradient-text">운영</span><span class="text-slate-900">하고,</span><br>
+            <span class="text-slate-900">직접 </span><span class="gradient-text">개발</span><span class="text-slate-900">합니다.</span>
+          </h1>
+        </div>
+
+        <!-- 오른쪽 아래 소개 박스 -->
+        <div class="mt-14 max-w-sm self-start lg:mt-0 lg:absolute lg:bottom-28 lg:right-8">
+          <p class="text-sm font-semibold leading-relaxed text-ink">
+            클로버나인 대표 · 개발자.<br>
+            웹메시징, 기프티콘, 고객관리 프로그램을 기획부터 개발, 운영까지 직접 만듭니다.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="#contact" class="pill-button">연락하기</a>
+            <a href="#projects" class="pill-button pill-button--ghost">프로젝트 보기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 소개 ===== -->
+    <section id="about" class="reveal scroll-mt-24 bg-white py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-5 sm:px-8">
+        <div class="mx-auto max-w-3xl">
+          <p class="text-2xl font-medium leading-relaxed text-slate-400 sm:text-3xl">
+            <strong class="font-extrabold text-ink">클로버나인</strong>은
+            웹메시징, 기프티콘, 고객관리프로그램을 만드는 회사입니다.
+            복잡한 기술보다 고객이 실제로 편해지는 결과를 먼저 생각하며,
+            기획부터 개발, 운영까지 한 사람이 끝까지 책임지는 방식으로 일합니다.
+          </p>
+        </div>
+
+        <div class="mt-20 grid gap-12 lg:grid-cols-12 lg:gap-8">
+          <div class="lg:col-span-4">
+            <p class="text-xs font-semibold uppercase tracking-widest text-slate-400">In numbers</p>
+            <!-- 사업 영역 미니 카드 -->
+            <div class="mt-6 grid gap-3">
+              <div class="flex items-center gap-3 rounded-2xl bg-canvas px-4 py-3">
+                <span class="h-2 w-2 rounded-full bg-primary-500"></span>
+                <span class="text-sm font-semibold text-ink">웹메시징</span>
+                <span class="text-xs text-slate-400">문자 · 알림톡 대량 발송</span>
+              </div>
+              <div class="flex items-center gap-3 rounded-2xl bg-canvas px-4 py-3">
+                <span class="h-2 w-2 rounded-full bg-primary-500"></span>
+                <span class="text-sm font-semibold text-ink">기프티콘</span>
+                <span class="text-xs text-slate-400">모바일 상품권 발송 · 관리</span>
+              </div>
+              <div class="flex items-center gap-3 rounded-2xl bg-canvas px-4 py-3">
+                <span class="h-2 w-2 rounded-full bg-primary-500"></span>
+                <span class="text-sm font-semibold text-ink">고객관리</span>
+                <span class="text-xs text-slate-400">CRM 프로그램 개발</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 큰 숫자 통계 (js/main.js 의 STATS 목록으로 그려집니다) -->
+          <div id="stat-list" class="grid gap-10 lg:col-span-8"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 프로젝트 (Case Study) ===== -->
+    <section id="projects" class="reveal scroll-mt-24 py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-5 sm:px-8">
+        <div class="flex items-end justify-between gap-6">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-widest text-slate-400">Case Study</p>
+            <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">프로젝트</h2>
+          </div>
+          <a href="mailto:clover9@warmguys.com?subject=프로젝트 문의" class="pill-button pill-button--ghost shrink-0">문의하기</a>
+        </div>
+
+        <!-- 카드는 js/main.js 의 PROJECTS 목록으로 그려집니다 -->
+        <div id="project-list" class="mt-10 grid gap-6 md:grid-cols-3"></div>
+      </div>
+    </section>
+
+    <!-- ===== 기술 스택 (로고 그리드 스타일) ===== -->
+    <section id="skills" class="reveal scroll-mt-24 py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-5 sm:px-8">
+        <div class="grid gap-12 lg:grid-cols-12 lg:gap-8">
+          <div class="lg:col-span-4">
+            <p class="text-xs font-semibold uppercase tracking-widest text-slate-400">Skills</p>
+            <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+              서비스를 끝까지<br>만드는 기술
+            </h2>
+            <p class="mt-5 leading-relaxed text-slate-500">
+              화면을 만드는 웹 기술부터 서버, 메시징 API 연동까지
+              한 서비스를 처음부터 끝까지 만들 수 있는 기술을 사용합니다.
+            </p>
+            <ul class="mt-8 space-y-3 text-sm">
+              <li class="flex items-center gap-3"><span class="legend-dot bg-primary-900"></span><span class="font-semibold text-ink">웹 기본</span><span class="text-slate-400">화면 · 동작</span></li>
+              <li class="flex items-center gap-3"><span class="legend-dot bg-primary-500"></span><span class="font-semibold text-ink">서버 / 백엔드</span><span class="text-slate-400">데이터 · API</span></li>
+              <li class="flex items-center gap-3"><span class="legend-dot bg-primary-300"></span><span class="font-semibold text-ink">메시징 / API</span><span class="text-slate-400">알림톡 · 결제 연동</span></li>
+            </ul>
+          </div>
+
+          <!-- 기술 타일 (js/main.js 의 SKILLS 목록으로 그려집니다) -->
+          <div id="skill-grid" class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:col-span-8 lg:grid-cols-4"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 연락처 + 푸터 (파란 그라데이션) ===== -->
+    <section id="contact" class="reveal scroll-mt-24 pt-10">
+      <footer class="footer-gradient relative overflow-hidden text-white">
+        <div class="mx-auto max-w-6xl px-5 pb-14 pt-28 sm:px-8 sm:pb-20 sm:pt-36">
+          <div class="grid gap-16 md:grid-cols-12">
+            <div class="md:col-span-6">
+              <p class="text-xs font-semibold uppercase tracking-widest text-white/70">Contact</p>
+              <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">함께 멋진 것을<br>만들어 봐요.</h2>
+              <p class="mt-4 max-w-md text-white/80">
+                프로젝트 문의, 협업 제안, 가벼운 인사 모두 환영합니다.
+                이메일로 연락해 주시면 빠르게 답변드리겠습니다.
+              </p>
+              <div class="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
+                <a href="mailto:clover9@warmguys.com" class="pill-button pill-button--light">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                  clover9@warmguys.com
+                </a>
+                <button id="copy-email" type="button" data-email="clover9@warmguys.com" class="pill-button pill-button--outline">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  <span id="copy-email-label">이메일 복사</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-8 text-sm md:col-span-6 md:grid-cols-3">
+              <div>
+                <p class="font-semibold text-white/60">페이지</p>
+                <ul class="mt-4 space-y-2.5">
+                  <li><a href="#about" class="footer-link">소개</a></li>
+                  <li><a href="#projects" class="footer-link">프로젝트</a></li>
+                  <li><a href="#skills" class="footer-link">기술</a></li>
+                  <li><a href="#contact" class="footer-link">연락처</a></li>
+                </ul>
+              </div>
+              <div>
+                <p class="font-semibold text-white/60">서비스</p>
+                <ul class="mt-4 space-y-2.5">
+                  <li class="text-white/90">웹메시징</li>
+                  <li class="text-white/90">기프티콘</li>
+                  <li class="text-white/90">고객관리 프로그램</li>
+                </ul>
+              </div>
+              <div>
+                <p class="font-semibold text-white/60">연락</p>
+                <ul class="mt-4 space-y-2.5">
+                  <li class="text-white/90">권일 · 클로버나인 대표</li>
+                  <li><a href="mailto:clover9@warmguys.com" class="footer-link">clover9@warmguys.com</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-20 flex flex-col gap-3 border-t border-white/15 pt-8 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
+            <p>© <span id="year">2026</span> 권일 · 클로버나인. All rights reserved.</p>
+            <a href="#top" class="footer-link">맨 위로 ↑</a>
+          </div>
+
+        </div>
+      </footer>
+    </section>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

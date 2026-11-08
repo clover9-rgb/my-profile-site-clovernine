@@ -1,0 +1,385 @@
+/* =========================================================
+   권일 프로필 사이트 - 보조 스타일
+   대부분의 꾸미기는 index.html 의 Tailwind 클래스로 처리하고,
+   여기에는 Tailwind 로 표현하기 번거로운 효과만 둡니다.
+   색상 값은 index.html 의 tailwind.config 와 맞춰 둡니다.
+   ========================================================= */
+
+:root {
+  --ink: #0b1220;
+  --canvas: #f2f4f7;
+  --p-300: #8db8ff;
+  --p-500: #2f6fff;
+  --p-600: #1f55e6;
+  --p-900: #172f6f;
+}
+
+/* ---------- 글자 그라데이션 (남색 → 파랑 → 하늘색) ---------- */
+.gradient-text {
+  background: linear-gradient(100deg, var(--p-900) 0%, var(--p-500) 55%, var(--p-300) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- 알약 버튼 ---------- */
+.pill-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 9999px;
+  border: 1px solid var(--ink);
+  background-color: var(--ink);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.pill-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -12px rgba(11, 18, 32, 0.45);
+}
+
+.pill-button--ghost {
+  background-color: #ffffff;
+  color: var(--ink);
+  border-color: rgba(11, 18, 32, 0.18);
+}
+
+.pill-button--ghost:hover {
+  border-color: var(--ink);
+}
+
+.pill-button--light {
+  background-color: #ffffff;
+  color: var(--ink);
+  border-color: #ffffff;
+  padding: 0.85rem 1.6rem;
+}
+
+.pill-button--outline {
+  background-color: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.45);
+  padding: 0.85rem 1.6rem;
+}
+
+.pill-button--outline:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ---------- 네비게이션 링크 ---------- */
+.nav-link {
+  position: relative;
+  color: #475569;
+  transition: color 0.2s;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--p-900), var(--p-300));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.nav-link:hover,
+.nav-link.is-active {
+  color: var(--ink);
+}
+
+#desktop-menu .nav-link:hover::after,
+#desktop-menu .nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+#mobile-menu .nav-link::after {
+  display: none;
+}
+
+#mobile-menu .nav-link.is-active {
+  background-color: var(--canvas);
+  color: var(--ink);
+}
+
+/* 스크롤 후 헤더: 반투명 흰 배경 + 흐림 효과 */
+#site-header.is-scrolled {
+  background-color: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(16, 24, 40, 0.06);
+}
+
+/* ---------- 히어로 입체 타일 배경 ---------- */
+.hero-tiles {
+  position: absolute;
+  inset: -12% -10% -10% -6%;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 18px;
+  transform: perspective(1400px) rotateX(18deg) rotateY(-8deg) rotateZ(-3deg) scale(1.12);
+  transform-origin: 60% 40%;
+  pointer-events: none;
+}
+
+.hero-tile {
+  aspect-ratio: 1 / 1;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #ffffff 0%, #eef1f5 100%);
+  box-shadow:
+    10px 12px 26px rgba(16, 24, 40, 0.10),
+    -8px -8px 20px rgba(255, 255, 255, 0.95),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: transform 0.6s ease;
+}
+
+/* 몇 개는 살짝 떠 있게, 몇 개는 살짝 눌린 느낌 */
+.hero-tile.is-raised {
+  transform: translateZ(28px);
+  box-shadow:
+    18px 22px 40px rgba(16, 24, 40, 0.16),
+    -10px -10px 24px rgba(255, 255, 255, 0.95);
+}
+
+.hero-tile.is-sunken {
+  background: linear-gradient(145deg, #eef1f5 0%, #f7f8fa 100%);
+  box-shadow:
+    inset 6px 6px 14px rgba(16, 24, 40, 0.08),
+    inset -6px -6px 14px rgba(255, 255, 255, 0.9);
+}
+
+/* 타일 위에 흰색 안개를 덮어 글자가 잘 보이게 */
+.hero-fade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.82) 38%, rgba(255, 255, 255, 0.35) 70%, rgba(255, 255, 255, 0.15) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0.9) 100%);
+}
+
+@media (max-width: 1023px) {
+  .hero-tiles {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+  }
+  .hero-tile {
+    border-radius: 18px;
+  }
+}
+
+/* ---------- 통계 숫자 ---------- */
+.stat-value {
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* ---------- 카드 (프로젝트 / 기술) ---------- */
+.card {
+  background-color: #ffffff;
+  border-radius: 1.25rem;
+  box-shadow:
+    0 10px 30px -10px rgba(16, 24, 40, 0.12),
+    0 2px 6px -2px rgba(16, 24, 40, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 28px 56px -18px rgba(16, 24, 40, 0.22),
+    0 8px 16px -8px rgba(16, 24, 40, 0.10);
+}
+
+/* 프로젝트 카드 위쪽 미리보기 영역 */
+.project-preview {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #f7f9fc 0%, #e9eef6 100%);
+}
+
+/* 미리보기 안의 가짜 화면(작은 창 모양) */
+.project-preview .mock-window {
+  position: absolute;
+  left: 50%;
+  bottom: -18px;
+  width: 78%;
+  transform: translateX(-50%);
+  border-radius: 12px 12px 0 0;
+  background: #ffffff;
+  box-shadow: 0 18px 40px -16px rgba(16, 24, 40, 0.35);
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.project-preview .mock-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--canvas);
+}
+
+.project-preview .mock-bar.is-accent {
+  width: 45%;
+  background: linear-gradient(90deg, var(--p-900), var(--p-300));
+}
+
+.project-preview .mock-bar.is-short {
+  width: 65%;
+}
+
+/* 프로젝트 성과 숫자 */
+.metric-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+/* 기술 타일 */
+.skill-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 108px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.skill-tile .skill-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.skill-tile .skill-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.legend-dot {
+  display: inline-block;
+  height: 0.6rem;
+  width: 0.6rem;
+  border-radius: 9999px;
+}
+
+/* ---------- 푸터 그라데이션 ---------- */
+.footer-gradient {
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(141, 184, 255, 0.55) 0%, rgba(141, 184, 255, 0) 55%),
+    linear-gradient(135deg, var(--p-900) 0%, var(--p-600) 55%, var(--p-300) 100%);
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---------- 프로젝트 카드 호버 효과 ---------- */
+/* .card 의 기본 호버 위에 더 뚜렷한 떠오름, 테두리 강조, 미리보기 변화를 더합니다. */
+.project-card {
+  border: 1px solid transparent;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(47, 111, 255, 0.25);
+  box-shadow:
+    0 32px 60px -20px rgba(23, 47, 111, 0.28),
+    0 8px 18px -8px rgba(16, 24, 40, 0.12);
+}
+
+.project-card .project-preview {
+  transition: background 0.35s ease;
+}
+
+.project-card:hover .project-preview {
+  background: linear-gradient(135deg, #eaf1ff 0%, #d6e4ff 100%);
+}
+
+.project-card .mock-window {
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover .mock-window {
+  transform: translate(-50%, -10px);
+}
+
+/* ---------- 섹션 등장 효과 ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- 스크롤바 ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--canvas);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 움직임을 줄이도록 설정한 사용자에게는 애니메이션 끄기 */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-tile,
+  .card,
+  .pill-button {
+    transition: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
